@@ -12,6 +12,8 @@ const app = express()
 
 
 dotenv.config()
+app.use(express.json())
+
 
 const connectDB = async () =>{
     try{
