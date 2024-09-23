@@ -107,6 +107,21 @@ adminRouter.put("/course",adminMiddleware,async (req,res)=>{
     }
 })
 
+adminRouter.get("/bulk/course",adminMiddleware, async(req,res)=>{
+    const adminId = req.userId;
+    
+    try{
+        const courses = await courseModel.find({
+            creatorId:adminId
+        })
+
+        
+        res.status(200).json({message:"Coureses ",courses})
+    }catch(e){
+        res.status(403).json({message:"Coudnt not get courses"})
+    }
+
+})
 module.exports={
     adminRouter
 }
