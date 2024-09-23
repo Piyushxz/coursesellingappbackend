@@ -1,22 +1,28 @@
 const mongoose = require("mongoose")
-const Schema = require("mongoose")
+
+
+
+const Schema = mongoose.Schema
 const ObjectId = mongoose.Types.ObjectId
 
 
-const userSchema = Schema({
+
+
+
+const userSchema = new Schema({
     username : String,
     email : {type : String , unique : true},
     password :String
 
 })
-const adminSchema = Schema({
+const adminSchema = new Schema({
     username : String,
     email : {type : String , unique : true},
     password :String
 })
 
 
-const courseSchema = Schema({
+const courseSchema = new Schema({
     title:String,
     description:String,
     price:Number,
