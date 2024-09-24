@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const {userModel} = require("../schema/db")
+const {userModel, purchaseModel, courseModel} = require("../schema/db")
 const jwt = require("jsonwebtoken")
 const {userMiddleware} = require('../middleware/user')
 const userRouter = Router()
@@ -61,10 +61,30 @@ userRouter.post("/signin", async (req,res)=>{
 })
 
 
-userRouter.post("/purchases",(req,res)=>{
-    res.json({
-        message:"Endpoint"
-    })
+userRouter.get("/purchases",userMiddleware, async(req,res)=>{
+
+    const userId = req.userId;
+
+    try{
+        const purchases = await purchaseModel.find({
+            userId
+        })
+    
+        const courses = await courseModel.find({
+            _id : {$in : purchases.map(x=> x.courseId)}
+        })
+    
+    
+        res.json({
+            purchases,
+            courses
+        })
+    }catch(e){
+        res.status(403).json({message:"Could not get purchases"})
+    }
+
+
+
 })
 
 module.exports={

@@ -1,8 +1,9 @@
 const {Router} = require("express")
-
+const jwt = require("jsonwebtoken")
 const adminRouter = Router()
 const {adminModel, courseModel} = require("../schema/db")
 const { adminMiddleware } = require("../middleware/admin")
+const e = require("express")
 
 
 adminRouter.post("/signup",async (req,res)=>{
@@ -11,7 +12,7 @@ adminRouter.post("/signup",async (req,res)=>{
     try{
         let foundUser = null;
 
-        foundUser = await adminModelModel.findOne({
+        foundUser = await adminModel.findOne({
         username:username,
         email:email
          })
@@ -31,7 +32,7 @@ adminRouter.post("/signup",async (req,res)=>{
         }
 
     }catch(err){
-        res.json({message:"Coudnt Sign Up" ,err})
+        res.json({message:"Coudnt Sign Up" ,err:err})
     }
 })
 
@@ -44,7 +45,6 @@ adminRouter.post("/signin", async (req,res)=>{
 
         foundUser = await adminModel.findOne({
             email:email,
-            password:password
         })
 
         if(foundUser){
@@ -71,8 +71,8 @@ adminRouter.post("/course",adminMiddleware,async (req,res)=>{
         const course = await courseModel.create({
             title,
             description,
-            imageUrl,
             price,
+            imageUrl,
             creatorId:adminId
         }) 
 
