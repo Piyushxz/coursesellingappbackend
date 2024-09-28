@@ -4,6 +4,7 @@ const { courseRouter } = require("./routes/course.js");
 const { adminRouter } = require("./routes/admin.js");
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
+const cors = require("cors")
 
 
 
@@ -13,7 +14,7 @@ const app = express()
 
 dotenv.config()
 app.use(express.json())
-
+app.use(cors())
 
 const connectDB = async () =>{
     try{

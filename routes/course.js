@@ -38,6 +38,19 @@ courseRouter.get("/preview",async(req,res)=>{
     }
 })
 
+courseRouter.get("/",async(req,res)=>{
+    const courseId = req.body.id
+    try{
+        const course = await courseModel.find({
+            _id:courseId
+        })
+
+        res.status(200).json({course})
+    }
+    catch(e){
+        res.status(403).json({message:"Could not fetch courses"})
+    }
+})
 module.exports = {
     courseRouter
 }

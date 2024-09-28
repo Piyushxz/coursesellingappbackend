@@ -51,7 +51,7 @@ userRouter.post("/signin", async (req,res)=>{
         if(foundUser){
             const token = jwt.sign({id:foundUser._id},process.env.SECRET_KEY)
 
-            res.status(200).json({message:"Signed In ! ", token})
+            res.status(200).json({message:"Signed In ! ", token,username:foundUser.username})
         }else{
             res.status(403).json({message:"Invalid credentials"})
         }
