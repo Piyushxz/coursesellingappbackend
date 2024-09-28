@@ -5,9 +5,10 @@ const Card = ({data}) => {
 
     const {title,description,imageUrl,price,_id} = data
     const {modalDispatch} = useModal()
-    const handleBuyNowClick = () =>{
+    const handleBuyNowClick = (id) =>{
         modalDispatch({
-            type:"OPEN_PURCHASE_MODAL"
+            type:"OPEN_PURCHASE_MODAL",
+            payload:id
         })
     }
   return (

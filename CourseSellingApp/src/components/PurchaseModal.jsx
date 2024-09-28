@@ -1,16 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useModal } from '../context/modal-context';
+import axios from 'axios';
 
 const PurchaseModal = () => {
     const {modalDispatch,id} = useModal()
+    const [course,setCourse] = useState({})
 
     const handleModalClose = ()=>{
         modalDispatch({
             type:"CLOSE_PURCHASE_MODAL"
         })
     }
+    console.log(course)
+    useEffect(()=>{
+        (async ()=>{
 
-    
+            try{
+                console.log("course id",id)
+                const response = await axios.get("http://localhost:3002/course",{ params: { id: id }})
+                setCourse(response.data)
+            }
+            catch(e){
+                console.log("Could not get course")
+            }
+
+        })()
+    },[])
 
  
 
@@ -66,7 +81,10 @@ const PurchaseModal = () => {
                                     />
                                 </svg>
                                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                    Are you sure you want to delete this product?
+                                    Course: {course.title} 
+                                </h3>
+                                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                    Price : ₹{course.price} 
                                 </h3>
                                 {/* Confirmation button */}
                                 <button
