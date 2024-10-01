@@ -24,12 +24,11 @@ const SignInModal = () => {
       setPassword(e.target.value)
     }
 
-    const handleSignInClick = async () =>{
-
+    const handleAutoSignInAsUserClick = async ()=>{
       try{
         const response = await axios.post("http://localhost:3002/user/signin",{
-          email,
-          password
+          email:"test@gmail.com",
+          password:"Piyush@12"
         })
 
         console.log(response)
@@ -39,6 +38,7 @@ const SignInModal = () => {
     
         if(tokenVal){
           localStorage.setItem("token",tokenVal)
+        
           localStorage.setItem("username",user)
           navigate("/user")
 
@@ -53,7 +53,58 @@ const SignInModal = () => {
       }
 
     }
+    const handleSignInClick = async () =>{
+      try{
+        const response = await axios.post("http://localhost:3002/user/signin",{
+          email,
+          
+          password
+        })
+        setTokenVal(response.data.token)
+        setUser(response.data.username)
+        
+        if(tokenVal){
+          localStorage.setItem("token",tokenVal)
+        
+          localStorage.setItem("username",user)
+          navigate("/user")
 
+          modalDispatch({
+            type:"OPEN_SIGNIN_MODAL"
+        })
+
+        }
+      }
+      catch(e){
+        console.log(e)
+      }
+
+    }
+    const handleAutoSignInClick = async () =>{
+      try{
+        const response = await axios.post("http://localhost:3002/admin/signin",{
+          email:"a@gmail.com",
+          password:"2323"
+        })
+        setTokenVal(response.data.token)
+        setUser(response.data.username)
+        
+        if(tokenVal){
+          localStorage.setItem("token",tokenVal)
+        
+          localStorage.setItem("username",user)
+          navigate("/admin")
+
+          modalDispatch({
+            type:"OPEN_SIGNIN_MODAL"
+        })
+
+        }
+      }
+      catch(e){
+        console.log(e)
+      }
+    }
   return (
     <>
 
@@ -122,13 +173,13 @@ const SignInModal = () => {
                     Submit
                 </button>
                 <button
-                
+                onClick={handleAutoSignInAsUserClick}
                 className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                 >
                Auto Sign In as User
               </button>
            <button
-             
+             onClick={handleAutoSignInClick}
              className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
            >
                Auto Sign In as Admin

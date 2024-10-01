@@ -39,7 +39,7 @@ courseRouter.get("/preview",async(req,res)=>{
 })
 
 courseRouter.get("/", async (req, res) => {
-    const courseId = req.query.id; // Access query parameters using req.query
+    const courseId = req.query.id; 
     console.log("Received courseId:", courseId);
 
     try {

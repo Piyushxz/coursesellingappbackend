@@ -7,6 +7,8 @@ import SignInModal from './components/SignInModal'
 import { Routes,Route } from 'react-router-dom'
 import Courses from './pages/Courses'
 import User from './pages/User'
+import Purchases from './pages/Purchases'
+import Admin from './pages/Admin'
 function App() {
   const [count, setCount] = useState(0)
   
@@ -19,6 +21,8 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/courses' element={<Courses/>} />
         <Route path='/user' element = {<User/>}/>
+        <Route path='/purchases' element={<Purchases/>}/>
+        <Route path='/admin' element={<Admin/>}/>
       </Routes>
       
       {

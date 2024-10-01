@@ -50,7 +50,9 @@ adminRouter.post("/signin", async (req,res)=>{
         if(foundUser){
             const token = jwt.sign({id:foundUser._id},process.env.ADMIN_SECRET_KEY)
 
-            res.status(200).json({message:"Signed In ! ", token})
+            
+
+            res.status(200).json({message:"Signed In ! ", token,"username":foundUser.username})
         }else{
             res.status(403).json({message:"Invalid credentials"})
         }
@@ -85,7 +87,7 @@ adminRouter.post("/course",adminMiddleware,async (req,res)=>{
 
 adminRouter.put("/course",adminMiddleware,async (req,res)=>{
     const adminId = req.userId;
-
+    
     const {title,description,price,imageUrl,courseId} = req.body;
 
     try{
