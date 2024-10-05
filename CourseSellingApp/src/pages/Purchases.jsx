@@ -9,7 +9,7 @@ const Purchases = () =>{
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:3002/user/purchases',{
+                const response = await axios.get('https://coursesellingappbackend.onrender.com/user/purchases',{
                     headers:{
                         token: token
                     }

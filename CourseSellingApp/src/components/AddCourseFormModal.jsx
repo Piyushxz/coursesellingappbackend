@@ -33,7 +33,7 @@ const Modal = () => {
     const handleAddCourseClick = async (e)=>{
         console.log(title,description,price,ImageURL)
         try{
-            const response = await axios.post("http://localhost:3002/admin/course",{
+            const response = await axios.post("https://coursesellingappbackend.onrender.com/admin/course",{
                 title,
                 description,
                 price,

@@ -26,7 +26,7 @@ const SignInModal = () => {
 
     const handleAutoSignInAsUserClick = async ()=>{
       try{
-        const response = await axios.post("http://localhost:3002/user/signin",{
+        const response = await axios.post("https://coursesellingappbackend.onrender.com/user/signin",{
           email:"test@gmail.com",
           password:"Piyush@12"
         })
@@ -55,7 +55,7 @@ const SignInModal = () => {
     }
     const handleSignInClick = async () =>{
       try{
-        const response = await axios.post("http://localhost:3002/user/signin",{
+        const response = await axios.post("https://coursesellingappbackend.onrender.com/user/signin",{
           email,
           
           password
@@ -82,7 +82,7 @@ const SignInModal = () => {
     }
     const handleAutoSignInClick = async () =>{
       try{
-        const response = await axios.post("http://localhost:3002/admin/signin",{
+        const response = await axios.post("https://coursesellingappbackend.onrender.com/admin/signin",{
           email:"a@gmail.com",
           password:"2323"
         })
