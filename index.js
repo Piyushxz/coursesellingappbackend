@@ -15,7 +15,7 @@ const app = express()
 dotenv.config()
 app.use(express.json())
 app.use(cors())
-
+console.log(process.env.URL)
 const connectDB = async () =>{
     try{
         await mongoose.connect(process.env.URL)
